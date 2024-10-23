@@ -24,6 +24,45 @@ class App():
         "Frame com checkbox contendo as escolhas do usuário"
         self.frame_inicial = ctk.CTkFrame(master=self.raiz, border_width=1)
         self.frame_inicial.place(relx=0.54, rely=0.1, relwidth=0.41, relheight=0.8)
+
+        self.check_var = ctk.StringVar(value="on") 
+
+        # checkbox numeros
+        self.VarCKB_numeros = ctk.CTkCheckBox(master=self.frame_inicial,
+                                            text="Numeros",
+                                            variable=self.check_var,
+                                            onvalue="on")
+        self.VarCKB_numeros.place(relx=0.17, rely=0.1, relwidth=0.5, relheight=0.2)
+
+        #checkbox simbolos
+        self.VarCKB_simbolos = ctk.CTkCheckBox(master=self.frame_inicial,
+                                            text="Simbolos",
+                                            variable=self.check_var,
+                                            onvalue="off")
+        self.VarCKB_simbolos.place(relx=0.17, rely=0.25, relwidth=0.5, relheight=0.2)
+
+        #checkbox Maiusculas
+        self.VarCKB_maiusculas = ctk.CTkCheckBox(master=self.frame_inicial,
+                                            text="Maiusculas",
+                                            variable=self.check_var,
+                                            onvalue="off")
+        self.VarCKB_maiusculas.place(relx=0.17, rely=0.4, relwidth=0.5, relheight=0.2)
+
+        #checkbox minusculas
+        self.VarCKB_minusculas = ctk.CTkCheckBox(master=self.frame_inicial,
+                                            text="Minusculas",
+                                            variable=self.check_var,
+                                            onvalue="off")
+        self.VarCKB_minusculas.place(relx=0.17, rely=0.55, relwidth=0.5, relheight=0.2)
+
+        #menu de opçoes para tamanho da senha
+        self.menu_opcao = ctk.CTkOptionMenu(master=self.frame_inicial,
+                                            values=["1","2","3","4","5","6","7","8","9","10","11","12"])
+        self.menu_opcao.place(relx=0.12, rely=0.75, relwidth=0.25, relheight=0.13)
+        
+        self.Label_menu_opcao = ctk.CTkLabel(master=self.frame_inicial,
+                                            text="Tamanho da senha")
+        self.Label_menu_opcao.place(relx=0.4, rely=0.75, relwidth=0.47, relheight=0.13)
     
     def frame_resultado(self) -> str:
         "Frame de saída do resultado"
