@@ -1,10 +1,15 @@
+__version__ = "1.0.0"
+
+
 import customtkinter as ctk
 from PIL import Image
+from envio_email import EnviarEmail
 
 class App():
 
     def __init__(self):
         self.raiz = ctk.CTk()
+        self.SistemaEnviar = EnviarEmail() #instancia de EnviarEmail
         self._configInterface()
         self.frame_widgets()
         self.frame_resultado()
@@ -31,6 +36,8 @@ class App():
         self.VarCKB_numeros = ctk.CTkCheckBox(master=self.frame_inicial,
                                             text="Numeros",
                                             variable=self.check_var,
+                                            border_width=2,
+                                            border_color="#888888",                                   
                                             onvalue="on")
         self.VarCKB_numeros.place(relx=0.17, rely=0.1, relwidth=0.5, relheight=0.2)
 
@@ -38,6 +45,8 @@ class App():
         self.VarCKB_simbolos = ctk.CTkCheckBox(master=self.frame_inicial,
                                             text="Simbolos",
                                             variable=self.check_var,
+                                            border_width=2,
+                                            border_color="#888888", 
                                             onvalue="off")
         self.VarCKB_simbolos.place(relx=0.17, rely=0.25, relwidth=0.5, relheight=0.2)
 
@@ -45,6 +54,8 @@ class App():
         self.VarCKB_maiusculas = ctk.CTkCheckBox(master=self.frame_inicial,
                                             text="Maiusculas",
                                             variable=self.check_var,
+                                            border_width=2,
+                                            border_color="#888888", 
                                             onvalue="off")
         self.VarCKB_maiusculas.place(relx=0.17, rely=0.4, relwidth=0.5, relheight=0.2)
 
@@ -52,6 +63,8 @@ class App():
         self.VarCKB_minusculas = ctk.CTkCheckBox(master=self.frame_inicial,
                                             text="Minusculas",
                                             variable=self.check_var,
+                                            border_width=2,
+                                            border_color="#888888", 
                                             onvalue="off")
         self.VarCKB_minusculas.place(relx=0.17, rely=0.55, relwidth=0.5, relheight=0.2)
 
@@ -77,10 +90,10 @@ class App():
                                         fg_color="#4169E1",
                                         border_width=1,
                                         border_color="#A9A9A9",
-                                        text="Gerar senha",
+                                        text="Gerar senha segura",
                                         image=self.imagem_requisitar)
         self.btt_requistar.place(relx=0.07, rely=0.53, relwidth=0.4, relheight=0.15)
-
+        
     def botao_feedback(self):
         self.imagem_outlook = ctk.CTkImage(light_image=Image.open("./imagens/outlook.png"),
                                         dark_image=Image.open("./imagens/outlook.png"),
@@ -89,8 +102,9 @@ class App():
                                         fg_color="#4169E1",
                                         border_width=1,
                                         border_color="#C0C0C0",
-                                        text="Feedback",
-                                        image=self.imagem_outlook)
+                                        text="Feedback via outlook",
+                                        image=self.imagem_outlook,
+                                        command= self.SistemaEnviar.Enviar)
         self.btt_feedback.place(relx=0.07, rely=0.74, relwidth=0.4, relheight=0.15)
 
 if __name__ == "__main__":
