@@ -1,10 +1,11 @@
 __version__ = "1.0.0"
 
 import customtkinter as ctk
+import win32com.client as win32
 from PIL import Image
-from envio_email import EnviarEmail
 import pyperclip
 import random
+
 
 
 
@@ -12,7 +13,6 @@ class App():
 
     def __init__(self) -> object:
         self.raiz = ctk.CTk()
-        self._SistemaEnviar = EnviarEmail() #instancia de EnviarEmail
         self._configInterface()
         self.frame_widgets()
         self.frame_resultado()
@@ -300,6 +300,20 @@ class App():
                                         command=self.gerar_senha)
         self.btt_requistar.place(relx=0.07, rely=0.55, relwidth=0.4, relheight=0.15)
         
+    def _enviar_email(self) -> (str | None):
+        """A classe tem a funcionalidade de integrar as contas (Gmail, Hotmail, Outlook) logadas no outlook, para enviar o feedback do usuário 
+        ao desenvolvedor. Método | Enviar( ) Configuraçoes nescessarias para enviar email ao desenvolvedor do sistema |
+        """
+        self._outlook = win32.Dispatch("outlook.application") # Integração python outlook
+        self._email = self._outlook.CreateItem(0) # Instancia no outlook
+        self.caixa_dialogo = ctk.CTkInputDialog(title="Feedback",
+                                                text="\nEste sistema é seguro!\nDesde já agradecemos sua colaboração!\nEscreva seu feedback abaixo!")
+        self.feedback = self.caixa_dialogo.get_input()
+        self._email.To = "delciocruzoficial@gmail.com"
+        self._email.Subject = "Feedback - Gerador de senhas"
+        self._email.Body = f"{self.feedback}"
+        self._email.Send()
+
     def botao_feedback(self):
         """ Botão responsavel pela chamada do feedback"""
         self.imagem_outlook = ctk.CTkImage(light_image=Image.open("./imagens/outlook.png"),
@@ -311,7 +325,7 @@ class App():
                                         border_color="#C0C0C0",
                                         text="Feedback via outlook",
                                         image=self.imagem_outlook,
-                                        command= self._SistemaEnviar.Enviar)
+                                        command= self._enviar_email)
         self.btt_feedback.place(relx=0.07, rely=0.74, relwidth=0.4, relheight=0.15)
 
     def area_trasnferencia(self) -> str:
