@@ -3,7 +3,7 @@ import customtkinter as ctk
 
 class EnviarEmail():
     """A classe tem a funcionalidade de integrar as contas (Gmail, Hotmail, Outlook) logadas no outlook, para enviar o feedback do usuário 
-    ao desenvolvedor. Método | Enviar( ) contem as configuraçoes nescessarias para enviar email ao desenvolvedor do sistema |
+    ao desenvolvedor. Método | Enviar( ) Configuraçoes nescessarias para enviar email ao desenvolvedor do sistema |
     """
 
     def Enviar(self) -> (str | None):
